@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Abhishek",
+    "score": 98,
+    "passed": true
+  },
+  {
+    "name": "Chandan",
+    "score": 84,
+    "passed": true
+  },
+  {
+    "name": "Anish",
+    "score": 35,
+    "passed": false
+  }
+]
