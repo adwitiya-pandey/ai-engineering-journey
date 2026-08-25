@@ -1,0 +1,20 @@
+[project]
+name = "ai-engineering-journey"
+version = "0.1.0"
+description = "From Python to Autonomous Agents"
+authors = [
+    { name = "adwitiya-pandey", email = "76179646+adwitiya-pandey@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "google-genai>=2.19.0",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+ai-engineering-journey = "ai_engineering_journey:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
