@@ -101,7 +101,7 @@ print(f"Got {len(embeddings)} embeddings in ~0.5s")
 
 
 
-# Creating Background Tasks
+# Creating Background Tasks (Start Now, Collect Later)
 async def warm_up_cache(user_id: int) -> dict:
     """Pre-load frequently used data while we do other setup"""
     await asyncio.sleep(2)
