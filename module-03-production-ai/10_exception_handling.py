@@ -8,14 +8,17 @@ def safe_parse_llm_response(raw_string: str):
         result = json.loads(raw_string)
         response = result["answer"]
     except json.JSONDecodeError:
-        print("The JSON file is corrupted.")
+        print("The JSON is malformed.")
+        return None
     except KeyError:
-        print("The LLM's response is missing the key called 'answer'.")
+        print("The key 'answer' does not exist.")
+        return None
     else:
         print("Successfully parsed response")
-        return response
     finally:
         print("Parsing attempt complete")   # finally runs even after else has triggered return
+
+    return response
 
 
 print(safe_parse_llm_response('{"answer": "Paris is the capital of France"}'))
