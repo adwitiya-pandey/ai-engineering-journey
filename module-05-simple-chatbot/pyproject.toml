@@ -1,0 +1,28 @@
+[project]
+name = "llm-chat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "adwitiya-pandey", email = "76179646+adwitiya-pandey@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=1.9.0",
+    "google-genai>=2.25.0",
+    "openai>=3.22.0",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+llm-chat = "llm_chat:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
