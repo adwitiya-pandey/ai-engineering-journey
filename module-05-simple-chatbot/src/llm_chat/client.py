@@ -10,6 +10,7 @@ Topic 1 behaviour is preserved on purpose: ask_llm() returns a plain
 string, and expected failures come back as "[...]" strings. Topic 2
 (conversation memory) is where this contract gets redesigned.
 """
+
 from __future__ import annotations
 
 from llm_chat.config import (
@@ -52,7 +53,7 @@ def _dispatch(
         valid = ", ".join(VALID_METHODS)
         raise ValueError(f"Unknown call method {method!r}. Valid choices: {valid}.")
 
-    api_key = get_validated_api_key(provider)   # also checks the provider name
+    api_key = get_validated_api_key(provider)  # also checks the provider name
     module = _PROVIDER_MODULES[provider]
     call = module.call_sdk if method == "sdk" else module.call_http
     return call(

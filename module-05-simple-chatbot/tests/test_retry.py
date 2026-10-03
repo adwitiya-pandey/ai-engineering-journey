@@ -58,7 +58,7 @@ def test_exhausted_after_max_attempts(no_sleep):
 
     with pytest.raises(RetryExhaustedError):
         retry_call(always_fails, provider="T", is_retryable=lambda e: True, config=cfg)
-    assert len(no_sleep) == 2   # sleeps between attempts, not after the last
+    assert len(no_sleep) == 2  # sleeps between attempts, not after the last
 
 
 def test_retry_after_header_is_honoured(no_sleep):
@@ -91,7 +91,15 @@ def test_retry_config_rejects_bad_numbers(kwargs):
 
 @pytest.mark.parametrize(
     "status, expected",
-    [(408, True), (429, True), (500, True), (503, True), (400, False), (401, False), (None, False)],
+    [
+        (408, True),
+        (429, True),
+        (500, True),
+        (503, True),
+        (400, False),
+        (401, False),
+        (None, False),
+    ],
 )
 def test_http_status_classification(status, expected):
     assert is_retryable_http_status(status) is expected

@@ -12,6 +12,7 @@ temporary?"
 Provider-specific classifiers (which SDK exception means what) live
 next to each provider in providers/. Only the generic pieces are here.
 """
+
 from __future__ import annotations
 
 import logging
@@ -34,9 +35,10 @@ class RetryConfig:
 
     max_attempts includes the FIRST try: 5 means one try + up to 4 retries.
     """
+
     max_attempts: int = 5
-    base_delay: float = 1.0    # first retry waits around this long
-    max_delay: float = 20.0    # no wait ever exceeds this
+    base_delay: float = 1.0  # first retry waits around this long
+    max_delay: float = 20.0  # no wait ever exceeds this
 
     def __post_init__(self) -> None:
         if self.max_attempts < 1:
@@ -77,16 +79,17 @@ def retry_call(
 
             if attempt == config.max_attempts:
                 raise RetryExhaustedError(
-                    f"{provider} request failed after "
-                    f"{config.max_attempts} attempts."
+                    f"{provider} request failed after {config.max_attempts} attempts."
                 ) from exc
 
             delay = _retry_delay(attempt, exc, config)
             LOGGER.warning(
-                "%s request failed with %s (attempt %d/%d); "
-                "retrying in %.1fs.",
-                provider, type(exc).__name__,
-                attempt, config.max_attempts, delay,
+                "%s request failed with %s (attempt %d/%d); retrying in %.1fs.",
+                provider,
+                type(exc).__name__,
+                attempt,
+                config.max_attempts,
+                delay,
             )
             time.sleep(delay)
 
@@ -134,11 +137,11 @@ def _retry_after_seconds(exc: BaseException, max_delay: float) -> float | None:
 # SHARED CLASSIFIERS (used by more than one provider)
 # ---------------------------------------------------------------------
 
+
 def is_retryable_http_status(status: object) -> bool:
     """True for 408, 409, 429 or any 5xx status code."""
-    return (
-        isinstance(status, int)
-        and (status in RETRYABLE_HTTP_STATUS_CODES or status >= 500)
+    return isinstance(status, int) and (
+        status in RETRYABLE_HTTP_STATUS_CODES or status >= 500
     )
 
 
@@ -162,9 +165,7 @@ def is_http_retryable(exc: BaseException) -> bool:
     import requests
 
     if isinstance(exc, requests.HTTPError):
-        status_code = (
-            exc.response.status_code if exc.response is not None else None
-        )
+        status_code = exc.response.status_code if exc.response is not None else None
         return is_retryable_http_status(status_code)
 
     if isinstance(exc, (requests.ConnectionError, requests.Timeout)):

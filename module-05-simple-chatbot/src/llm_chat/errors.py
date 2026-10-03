@@ -10,6 +10,7 @@ WHY A FAMILY: all four inherit from LLMError, so a caller can catch
 "any expected LLM problem" with one except clause, or catch a specific
 one when it needs to react differently.
 """
+
 from __future__ import annotations
 
 

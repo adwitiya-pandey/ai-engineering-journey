@@ -1,4 +1,5 @@
 """openai_provider.py : OpenAI, via SDK and via raw HTTP."""
+
 from __future__ import annotations
 
 import requests

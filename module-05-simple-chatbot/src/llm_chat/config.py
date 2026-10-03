@@ -9,6 +9,7 @@ Compared with the single-file version, two things changed:
     prompts on import cannot be used by tests or by Streamlit (Topic 6).
   * load_dotenv() runs when a key is requested, not at import.
 """
+
 from __future__ import annotations
 
 import os
@@ -50,8 +51,7 @@ def get_required_env(name: str) -> str:
     value = os.getenv(name, "").strip()
     if not value:
         raise ConfigurationError(
-            f"Required environment variable {name!r} is not set. "
-            f"Check your .env file."
+            f"Required environment variable {name!r} is not set. Check your .env file."
         )
     return value
 

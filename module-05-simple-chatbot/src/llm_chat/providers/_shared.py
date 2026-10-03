@@ -1,4 +1,5 @@
 """Small helpers shared by every provider module."""
+
 from __future__ import annotations
 
 HTTP_TIMEOUT_SECONDS = 30

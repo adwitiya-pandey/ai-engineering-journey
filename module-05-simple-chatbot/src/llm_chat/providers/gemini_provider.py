@@ -1,4 +1,5 @@
 """gemini_provider.py : Google Gemini, via SDK and via raw HTTP."""
+
 from __future__ import annotations
 
 import requests

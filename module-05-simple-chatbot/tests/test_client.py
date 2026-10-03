@@ -1,6 +1,7 @@
 """Characterisation tests: they pin down what ask_llm() does TODAY
 (Topic 1 behaviour) so Topic 2 changes cannot break it silently.
 No network calls; providers are replaced with fakes."""
+
 import pytest
 
 from llm_chat import client, config
@@ -27,7 +28,9 @@ def test_returns_reply_text_on_success(monkeypatch):
     seen = {}
 
     def fake_sdk(api_key, settings, system_prompt, user_prompt, max_tokens):
-        seen.update(key=api_key, system=system_prompt, user=user_prompt, tokens=max_tokens)
+        seen.update(
+            key=api_key, system=system_prompt, user=user_prompt, tokens=max_tokens
+        )
         return "Hello Priya!"
 
     _patch_call(monkeypatch, "gemini", "call_sdk", fake_sdk)
@@ -61,7 +64,9 @@ def test_missing_key_returns_configuration_error(monkeypatch):
 
 def test_permanent_provider_error_message_includes_cause(monkeypatch):
     def rejects(*args):
-        raise ProviderRequestError("Gemini request failed: ClientError.") from ValueError("401 bad key")
+        raise ProviderRequestError(
+            "Gemini request failed: ClientError."
+        ) from ValueError("401 bad key")
 
     _patch_call(monkeypatch, "gemini", "call_sdk", rejects)
     reply = client.ask_llm("s", "u")
