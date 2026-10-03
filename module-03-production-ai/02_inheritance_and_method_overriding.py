@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 
+
 class BaseAgent(ABC):
     def __init__(self, name):
         self.name = name
@@ -33,7 +34,7 @@ def run_all(task, *agents):
         print(agent.execute(task))
 
 
-summary = SummaryAgent(name= "Summarization")
+summary = SummaryAgent(name="Summarization")
 translation = TranslationAgent("Translation", "Sanskrit")
 agent = (summary, translation)
 run_all("Summarize the news article", *agent)

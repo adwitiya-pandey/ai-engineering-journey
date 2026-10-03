@@ -1,5 +1,6 @@
 # Tracks LLM experiments with runs and costs
 
+
 class LLMExperiment:
     def __init__(self, experiment_name: str, model_used: str, max_tokens: int):
         self.experiment_name = experiment_name
@@ -21,6 +22,7 @@ class LLMExperiment:
         print(f"Runs Completed: {self.runs_completed}")
         print(f"Total Cost in USD: {self.total_cost_usd}")
 
+
 design = LLMExperiment("Shirt Design", "nano-banana", 1024)
 design.log_run(10, "Draft 1")
 design.log_run(8, "Draft 2")
@@ -32,11 +34,17 @@ design.summary()
 
 # RAGPipeline with validated attribute
 
+
 class RAGPipeline:
     DEFAULT_CHUNK_SIZE = 512
     DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
 
-    def __init__(self, pipeline_name: str, chunk_size: int | None = None, embedding_model: str = DEFAULT_EMBEDDING_MODEL):
+    def __init__(
+        self,
+        pipeline_name: str,
+        chunk_size: int | None = None,
+        embedding_model: str = DEFAULT_EMBEDDING_MODEL,
+    ):
         self.pipeline_name = pipeline_name
         self.chunk_size = chunk_size
         self.embedding_model = embedding_model
@@ -75,6 +83,7 @@ class RAGPipeline:
         for i in self.documents:
             print("\t", i)
         print(f"Chunk Size: {self.chunk_size}\nEmbedding Model: {self.embedding_model}")
+
 
 ragbasic = RAGPipeline("Basic RAG")
 print()

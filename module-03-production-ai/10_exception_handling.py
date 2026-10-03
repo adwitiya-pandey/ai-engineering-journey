@@ -16,14 +16,16 @@ def safe_parse_llm_response(raw_string: str):
     else:
         print("Successfully parsed response")
     finally:
-        print("Parsing attempt complete")   # finally runs even after else has triggered return
+        print(
+            "Parsing attempt complete"
+        )  # finally runs even after else has triggered return
 
     return response
 
 
 print(safe_parse_llm_response('{"answer": "Paris is the capital of France"}'))
 print("=" * 80)
-print(safe_parse_llm_response('not valid json at all'))
+print(safe_parse_llm_response("not valid json at all"))
 print("=" * 80)
 print(safe_parse_llm_response('{"question": "What is the capital?"}'))
 print("=" * 80)

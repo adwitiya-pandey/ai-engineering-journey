@@ -14,7 +14,7 @@ async def main(number: list) -> None:
 
     coro = [parallel_square_roots(n) for n in number]
 
-    result = await asyncio.gather(*coro, return_exceptions= True)
+    result = await asyncio.gather(*coro, return_exceptions=True)
 
     for integer, root in zip(number, result):
         if isinstance(root, Exception):
@@ -30,15 +30,16 @@ asyncio.run(main([4, 9, 16, -25, 100]))
 print("=" * 80)
 # Another example of a concurrent process with exception handling
 
+
 async def resilient_llm_fan_out(model: str) -> tuple[str, int]:
     """Simulate one LLM API call. Raises ConnectionError for unstable-llm."""
     if model == "unstable-llm":
         raise ConnectionError("Model unavailable")
-    delay = len(model)                          # variable delay per model
+    delay = len(model)  # variable delay per model
     start = time.monotonic()
     await asyncio.sleep(delay)
     elapsed = round(time.monotonic() - start)
-    return model, elapsed   
+    return model, elapsed
 
 
 async def main(models: list[str]) -> None:
@@ -48,7 +49,7 @@ async def main(models: list[str]) -> None:
     """
     coro = [resilient_llm_fan_out(model) for model in models]
 
-    results = await asyncio.gather(*coro, return_exceptions= True)
+    results = await asyncio.gather(*coro, return_exceptions=True)
 
     for model, result in zip(models, results):
         if isinstance(result, Exception):
@@ -71,10 +72,12 @@ async def make_tea():
     await asyncio.sleep(3)
     return "Tea"
 
+
 async def make_toast():
     print("Bread in toaster...")
     await asyncio.sleep(2)
     return "Toast"
+
 
 async def breakfast():
     tea = asyncio.create_task(make_tea())
@@ -86,5 +89,6 @@ async def breakfast():
     print(await toast, "is ready!")
     elapsed = round(time.monotonic() - start)
     print(f"Total runtime = {elapsed} seconds")
+
 
 asyncio.run(breakfast())

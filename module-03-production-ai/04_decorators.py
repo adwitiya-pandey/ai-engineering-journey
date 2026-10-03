@@ -2,6 +2,7 @@
 
 import functools
 
+
 def check_not_empty(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -21,6 +22,7 @@ def check_not_empty(func):
 
     return wrapper
 
+
 @check_not_empty
 def summarise(text: str) -> str:
     return "Summary: " + text
@@ -28,12 +30,11 @@ def summarise(text: str) -> str:
 
 # --- Testing the decorator ---
 print("Implementing Sanity Check for Input\n")
-print(summarise(''))
-print(summarise('What a nice day!'))
+print(summarise(""))
+print(summarise("What a nice day!"))
 print(summarise(text="The sky is light blue."))
 print("=" * 100)
 print()
-
 
 
 # Validating the input value of a function through a decorator
@@ -44,6 +45,7 @@ def validate_score(min_val: float, max_val: float):
     Decorator factory that validates whether the first argument of the
     decorated function falls within [min_val, max_val] (inclusive).
     """
+
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
@@ -51,7 +53,7 @@ def validate_score(min_val: float, max_val: float):
             if args:
                 score = args[0]
             elif kwargs:
-            # If passed via keyword argument, take the first keyword value
+                # If passed via keyword argument, take the first keyword value
                 score = next(iter(kwargs.values()))
             else:
                 raise ValueError("Expected at least one argument to validate.")
@@ -63,7 +65,9 @@ def validate_score(min_val: float, max_val: float):
                 )
 
             return func(*args, **kwargs)
+
         return wrapper
+
     return decorator
 
 
@@ -75,10 +79,10 @@ def record_accuracy(accuracy: float) -> str:
 # --- Testing the decorator ---
 print("Validating the input value of a function through a decorator\n")
 # 1. Valid test cases
-print(record_accuracy(95.5))            # Positional arg
-print(record_accuracy(0))               # Lower bound
-print(record_accuracy(100))             # Upper bound
-print(record_accuracy(accuracy=88.2))   # Keyword arg
+print(record_accuracy(95.5))  # Positional arg
+print(record_accuracy(0))  # Lower bound
+print(record_accuracy(100))  # Upper bound
+print(record_accuracy(accuracy=88.2))  # Keyword arg
 
 # 2. Invalid test cases
 test_invalid_scores = [-5.0, 105.0]
@@ -97,6 +101,7 @@ print()
 
 def cache_result(func):
     cache = {}
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         # Extracting the passed value
@@ -116,6 +121,7 @@ def cache_result(func):
 
         print(cache)
         return result
+
     return wrapper
 
 
@@ -129,9 +135,9 @@ print("Giving memory to a function through a decorator\n")
 print(slow_embed("Ant"))
 print(slow_embed("Antarctica"))
 print(slow_embed("Yellow"))
-print(slow_embed(word = "Smart"))
+print(slow_embed(word="Smart"))
 print(slow_embed("Bulb"))
 print(slow_embed("Mosquito"))
 print(slow_embed("Ant"))
-print(slow_embed(word = "Yellow"))
+print(slow_embed(word="Yellow"))
 print("=" * 100)
