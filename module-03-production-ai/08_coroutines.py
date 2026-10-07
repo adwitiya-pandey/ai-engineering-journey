@@ -11,7 +11,6 @@ async def parallel_square_roots(number: int) -> float:
 
 
 async def main(number: list) -> None:
-
     coro = [parallel_square_roots(n) for n in number]
 
     result = await asyncio.gather(*coro, return_exceptions=True)
