@@ -5,9 +5,6 @@ One entry point, `ask_llm()`, can call Gemini, OpenAI or Anthropic, either
 through the official SDK or through raw HTTP, with input validation and a
 retry policy that separates temporary failures from permanent ones.
 
-> Status: **Topic 1 complete** (single LLM call).
-> Next: **Topic 2** (conversation loop with memory).
-
 ## Why it is built this way
 
 | Decision | Reason |
